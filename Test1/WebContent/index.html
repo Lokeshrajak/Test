@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta http-equiv="X-UA-compatible" content="IE=edge" />
+		<meta charset="UTF-8" />
+		<style>
+		    .testoverlay {
+    position: relative;
+    margin-left: -10px;
+    width:700px;
+    height:440px;
+}
+
+.testpanel {
+    position: absolute!important;
+    padding-left: 0px;
+    width:750px!important;
+    /*height:300px!important;*/
+    transform: translateX(100%);
+    right:45px;
+    bottom:0px;
+    max-height:100%;
+    min-height:70%;
+    
+
+    
+}
+
+.testpanel>div {
+    position: absolute;
+    padding: 0px;
+    margin:0px;
+    width:750px!important;
+    height:100%;
+    background-color:transparent;
+    border-bottom:0px!important;
+    
+}
+
+.testlist {
+    position: relative;
+    left:44px;
+    width:94%!important;
+    overflow: scroll;
+    height:94%!important;
+    
+}
+
+.testlist>div {
+    position: relative;
+    margin-right:0px!important;
+    margin-left:0px!important;
+    margin-top:0px!important;
+    
+}
+.testtext {
+    position: absolute!important;
+    left:44px;
+    width:700px;
+    height:100%!important;
+    
+}
+.testtext>input {
+    height:100%!important;
+}
+
+.testbutton {
+   
+   transform: translateX(-50%) rotate(90deg) translateY(-50%);
+   left:0px;
+   top:50%;
+   position:absolute!important;
+
+}
+
+.testcontent {
+   
+   top:0px;
+   right:0px;
+   width:100%!important;
+   height:440px!important;
+   position:relative!important;
+   overflow:hidden;
+
+}
+
+/*
+.testcontent>div {
+   
+   height:100%!important;
+   position:relative!important;
+   overflow:hidden;
+
+
+}
+*/
+</style>
+		<script
+		  id="sap-ui-bootstrap" 
+		  src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+		  data-sap-ui-theme="sap_bluecrystal"
+		  data-sap-ui-libs="sap.m,sap.ui.layout"
+		  data-sap-ui-bindingSyntax="complex"
+		  data-sap-ui-resourceroots=
+		  '{
+		  "sap.ui.demo.wt": "./"
+		  }'
+		  >
+		  
+			
+		</script>
+		<script>
+		
+		    function show_coords(e1)
+			{
+			     
+			        var oEle;
+			        
+			        
+			        oEle = document.getElementsByClassName("testpanel")[0];
+			        
+			        var oRect = oEle.getBoundingClientRect();
+			        
+			        
+			        if ((e1.clientX > oRect.left && e1.clientX < oRect.right) &&  (e1.clientY >  (oRect.top - 20)  &&  e1.clientY < (oRect.top + 20 )))
+			        {
+			           moDown = true;
+			           //document.body.style.cursor = "s-resize";
+			        }
+		
+			    
+			};
+			
+			function moup(e1)
+			{
+			        var oEle;
+			        
+			        
+			        oEle = document.getElementsByClassName("testpanel")[0];
+			        moDown = false;
+			       // document.body.style.cursor = "default";
+		
+			    
+			};
+			
+			function momove(e2)
+			{
+			    
+			               var oEle;
+			        
+			        
+			               oEle = document.getElementsByClassName("testpanel")[0];
+			               var oRect1 = oEle.getBoundingClientRect();
+			               
+			               if ((e2.clientX > oRect1.left && e2.clientX < oRect1.right) &&  (e2.clientY >  (oRect1.top - 20)  &&  e2.clientY < (oRect1.top + 20 )))
+			               {
+			                    document.body.style.cursor = "s-resize";
+			                }
+			                else
+			                {
+			                    document.body.style.cursor = "default";   
+			                }
+			    
+			                
+			                
+                            if (moDown===true && (oRect1.top - e2.clientY > 2 ||  e2.clientY - oRect1.top > 2))
+                            {
+                                 //oEle.style.height = oEle.clientHeight + oRect1.top - e2.clientY + "px";
+                                 
+                                 if(oRect1.top - e2.clientY > 0)
+                                 {
+                                     oEle.style.height = oEle.clientHeight + 2 + "px";
+                                 }
+                                 else
+                                 {
+                                     oEle.style.height = oEle.clientHeight - 2 + "px";
+                                 }
+                                
+                            }
+                   
+			};
+			sap.ui.getCore().attachInit(function()
+			{
+			    sap.ui.jsview("main","sap.ui.demo.wt.view.jsmain1").placeAt("content");			}
+			);
+		</script>
+		
+		
+	</head>
+	<body  class="sapUiBody" onmousedown = "show_coords(event)" onmousemove = "momove(event)"  onmouseup = "moup(event)" >
+	
+	<div id = "content" >
+	
+	   		<H1> This is the header. This part remains fixed.</H1>
+	
+	<p style="width:700px overflow:scroll" >
+	    Paragraph copied from net which will be overlaid.
+	    
+	    The standards development of HTTP was coordinated by the Internet Engineering Task Force (IETF) and the World Wide Web Consortium (W3C), culminating in the publication of a series of Requests for Comment
+	</p>
+	
+		<p>
+	    Paragraph copied from net which will be overlaid.
+	    
+	    The standards development of HTTP was coordinated by the Internet Engineering Task Force (IETF) and the World Wide Web Consortium (W3C), culminating in the publication of a series of Requests for Comment
+	</p>
+	    
+	</div >
+		
+	</body>
+</html>
