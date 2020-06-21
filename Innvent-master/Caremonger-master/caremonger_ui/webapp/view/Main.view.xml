@@ -1,0 +1,117 @@
+<mvc:View controllerName="caremonger.caremonger_ui.controller.Main" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.f.semantic">
+	<App id = "idApp">
+	<semantic:SemanticPage
+		id="page"
+		headerPinnable="false"
+		toggleHeaderOnTitleClick="false">
+
+		<semantic:titleHeading>
+			<Title
+				text="{i18n>worklistTitle}"
+				level="H2"/>
+		</semantic:titleHeading>
+	
+		<semantic:content>
+		<IconTabBar
+				id="iconTabBar"
+				select=".onQuickFilter"
+				expandable="false"
+				headerBackgroundDesign="Transparent">
+					<items>
+					<IconTabFilter
+						key="all"
+						showAll="true"
+						text="All Locations"/>
+					<IconTabFilter
+						id="Whitefield"
+						key="Whitefield"
+						count=""
+						icon="sap-icon://message-success"
+						iconColor="Positive"
+						text="Whitefield"/>
+					<IconTabFilter
+						id="Mahadevpura"
+						key="Mahadevpura"
+						count=""
+						icon="sap-icon://message-error"
+						iconColor="Default"
+						text="Mahadevpura"/>
+					<IconTabFilter
+						id="Hoodi"
+						key="Hoodi"
+						count=""
+						icon="sap-icon://message-warning"
+						iconColor="Critical"
+						text="Hoodi"/>
+				
+				</items>
+				<content>
+			<Table
+				id="table"
+				width="auto"
+				items= "{path: 'TableData>/results' }">
+
+				<headerToolbar>
+					<OverflowToolbar>
+					<Title
+							id="tableHeader"
+							text="Request Details"
+							level="H3"/>
+						<ToolbarSpacer />
+						</OverflowToolbar>
+				</headerToolbar>
+
+				<columns>
+					
+					<Column hAlign="Center" id="unitNumberColumn1" >
+						<Text text="{i18n>tableColumnTitle1}" id="unitNumberColumnTitle1"/>
+					</Column>
+					<Column hAlign="Center" id="unitNumberColumn6"  >
+						<Text text="{i18n>tableColumnTitle6}" id="unitNumberColumnTitle6" />
+					</Column>
+					<Column hAlign="Center" id="unitNumberColumn2" >
+						<Text text="{i18n>tableColumnTitle2}" id="unitNumberColumnTitle2"/>
+					</Column>
+					<Column hAlign="Center" id="unitNumberColumn3">
+						<Text text="{i18n>tableColumnTitle3}" id="unitNumberColumnTitle3"/>
+					</Column>
+					<Column hAlign="Center" id="unitNumberColumn4">
+						<Text text="{i18n>tableColumnTitle4}" id="unitNumberColumnTitle4"/>
+					</Column>
+					<Column id="unitNumberColumn5" hAlign="End">
+						<Text text="{i18n>tableColumnTitle5}" id="unitNumberColumnTitle5"/>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem type= "Navigation" press = ".onPress">
+					<!--type="{path:'TableData>REQUEST_STATUS', formatter:'utils.Formatter.getNav'}"-->
+					<!--	press=".onPress"	-->
+					
+						<cells>
+							<ObjectIdentifier
+								title="{TableData>REQUESTER_NAME}"/>
+							<ObjectIdentifier
+								title="{TableData>REQUESTER_PHONE_NUMBER}" />
+							<ObjectIdentifier
+								title="{TableData>REQUEST_DESCRIPTION}" width="30%" tooltip="{TableData>REQUEST_DESCRIPTION}"/>
+							<ObjectIdentifier
+								title="{TableData>REQUEST_TYPE}"/>
+							<ObjectStatus
+								text="{TableData>CRITICALITY}"
+								state="{path:'TableData>CRITICALITY', formatter:'utils.Formatter.getCriticality'}"/>
+							<ObjectStatus text = "{TableData>REQUEST_STATUS}"
+										  state="{path:'TableData>REQUEST_STATUS', formatter:'utils.Formatter.getOrderStatus'}" />
+										  
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+				</content>
+					</IconTabBar>
+		</semantic:content>
+
+	</semantic:SemanticPage>
+</App>
+</mvc:View>

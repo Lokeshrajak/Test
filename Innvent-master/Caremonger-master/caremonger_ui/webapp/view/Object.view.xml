@@ -1,0 +1,82 @@
+<mvc:View controllerName="caremonger.caremonger_ui.controller.Object" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core"
+	xmlns:semantic="sap.f.semantic" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false" busy="{objectView>/busy}"
+		busyIndicatorDelay="{objectView>/delay}">
+		<semantic:titleHeading>
+			<Title text="Lokesh Rajak"/>
+		</semantic:titleHeading>
+		<semantic:headerContent>
+			<FlexBox alignItems="Start" justifyContent="SpaceBetween">
+				<Panel backgroundDesign="Transparent">
+					<ObjectAttribute title="Achievements" text="Bronze"/>
+					<ObjectAttribute title="Helped" text="12 People"/>
+				</Panel>
+				<Panel backgroundDesign="Transparent">
+					<ObjectNumber id="objectHeader" unit="Urgency Level of Task" class="sapUiSmallMarginBottom" state="Error" number="90 %"></ObjectNumber>
+					<ObjectStatus class="sapUiSmallMarginBottom" text="Task is Critical" icon="sap-icon://status-positive" state="Error"/> 
+					<ProgressIndicator width="300px" class="sapUiSmallMarginBottom" percentValue="90" displayValue="90 %" showValue="true" state="Error"/>
+				</Panel>
+			</FlexBox>
+		</semantic:headerContent>
+		<semantic:content>
+			<l:VerticalLayout width="100%">
+			
+				<Panel backgroundDesign="Transparent" headerText="{Requester Details}">
+					<content>
+				 
+						<form:SimpleForm minWidth="1024" maxContainerCols="2" editable="false" layout="ResponsiveGridLayout" labelSpanL="3" labelSpanM="3"
+							emptySpanL="4" emptySpanM="4" columnsL="1" columnsM="1">
+							<form:content>
+							
+								<Label text="{i18n>tableColumnTitle1}"/>
+								<Text text="Mark"/>
+								<Label text="{i18n>tableColumnTitle6}"/>
+								<Text text="9832198321"/>
+								<Label text="{i18n>tableColumnTitle2}"/>
+								<Text text="Hello I am Mark Calling from Whitefield. I need insulin Urgently."/>
+								<Label text="{i18n>tableColumnTitle3}"/>
+								<Text text="Medicine"/>
+								<Label text="{i18n>tableColumnTitle4}"/>
+								<Text text="High"/>
+								<Label text="Request Status"></Label>
+								<ComboBox width= "50%" id = "combo">
+								<core:Item key="In Process" text="In Process" />
+								<core:Item key="Completed" text="Completed" />
+								<core:Item key="Closed" text="Closed" />
+								<core:Item key="New" text="New" />
+								</ComboBox>
+								<HBox alignItems="Center">
+									<Label text="Processing Started" class="sapUiTinyMarginEnd"/>
+									<Switch type="AcceptReject" state="true" change="toggleEnabled"/>
+								</HBox>
+								
+							</form:content>
+						</form:SimpleForm>
+					 
+					</content>
+				</Panel>
+				<Panel backgroundDesign="Transparent" headerText="Comments">
+					<content>
+						<FeedInput post=".onPost"/>
+						<List
+                            id="idCommentsList"
+                            noDataText="{i18n>ObjectCommentNoData}"
+                            showSeparators="Inner"
+                            items="{
+                                path: 'productFeedback>/productComments',
+                                sorter: {
+                                    path: 'date',
+                                    descending: true
+                                }
+                            }">
+                            <FeedListItem
+                                info="{productFeedback>type}"
+                                text="{productFeedback>comment}"
+                                timestamp="{productFeedback>date}"/>
+						</List>
+					</content>
+				</Panel>
+			</l:VerticalLayout>
+		</semantic:content>
+	</semantic:SemanticPage>
+</mvc:View>
